@@ -121,13 +121,14 @@ data-aos-duration="2000" src="imgs/partners/p1.jpg" alt="ak logo">
     </div>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
   <script>
     AOS.init();
   </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
@@ -174,12 +175,10 @@ const enterButton = document.getElementById("enter");
 
 // Select the table body where new rows will be added
 window.addEventListener("DOMContentLoaded", () => {
-  tableBody = document.getElementById("AddTr");
-
-  // Load table data from the database
-  setTimeout(() => {
+  // tableBody = document.getElementById("AddTr");
+setTimeout(() => {
   
-
+  console.log("c="+c);
   // Load table data from the database
   const dbRef = ref(database, 'Table/tableRow');
   onValue(dbRef, (snapshot) => {
@@ -198,7 +197,10 @@ enterButton.addEventListener("click", function() {
   // Create a new row element
   c++;
   a++;
+  console.log("c="+c);
   if (c % 2 != 0) {
+
+    location.reload;
     const newRow = document.createElement("tr");
 
     // Add editable cells to the new row element
@@ -214,14 +216,6 @@ enterButton.addEventListener("click", function() {
     // Save the updated table data to local storage
     // localStorage.setItem("tableData", tableBody.innerHTML);
 
-    TInHtml = tableBody.innerHTML.replace(/(\r\n|\n|\r)/gm, "");
-    console.log(TInHtml);
-
-
-  
-  
-    const dbRef = ref(database, 'Table/tableRow');
-
 
     // code for the data base
     element[0].style.backgroundColor = "red";
@@ -233,9 +227,16 @@ enterButton.addEventListener("click", function() {
     element[0].innerHTML = "Enter Your Status";
 
     console.log(TInHtml);
-    setTimeout(() => {
-      
     
+      
+    TInHtml = tableBody.innerHTML.replace(/(\r\n|\n|\r)/gm, "");
+    console.log(TInHtml);
+
+
+  
+  
+    const dbRef = ref(database, 'Table/tableRow');
+    // setTimeout(() => {
     set(ref(database, "Table/tableRow"), {
       Table_Body: TInHtml,
     })
@@ -250,7 +251,10 @@ enterButton.addEventListener("click", function() {
         console.error(error);
         alert("error: " + error.message);
       });
-    }, 5000);
+    // }, 3000);
+    
+    
+   
     let edt = document.getElementsByTagName("td");
 
     Array.from(edt).forEach((element) => {
